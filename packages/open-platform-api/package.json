@@ -1,0 +1,12 @@
+{
+  "name": "@tswjs/open-platform-api",
+  "version": "1.1.1",
+  "description": "Open api for https://tswjs.org",
+  "main": "index.js",
+  "repository": "https://github.com/tswjs/open-platform-api.git",
+  "author": "maplemiao <522856232@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
