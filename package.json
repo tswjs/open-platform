@@ -1,0 +1,22 @@
+{
+  "name": "tsw-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tswjs/tsw-plugin.git"
+  },
+  "author": "tsw-team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tswjs/tsw-plugin/issues"
+  },
+  "homepage": "https://github.com/tswjs/tsw-plugin#readme",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
