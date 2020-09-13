@@ -3,10 +3,9 @@
   "version": "1.1.8",
   "main": "./index.js",
   "dependencies": {
-    "@tswjs/open-platform-api": "^1.1.1",
+    "@tswjs/open-platform-api": "^1.1.x",
     "ip": "^1.1.5"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +19,6 @@
     "url": "https://github.com/tswjs/open-platform-plugin/issues"
   },
   "homepage": "https://github.com/tswjs/open-platform-plugin#readme",
-  "description": ""
+  "description": "",
+  "gitHead": "cb9a88877147883e4151c5ca5814e4b009436f54"
 }
