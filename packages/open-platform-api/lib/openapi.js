@@ -4,7 +4,7 @@ const { signature } = require("./sig");
 const { encode } = require("./encrypt");
 
 /**
- * tswjs开放平台openapi接口封装 
+ * tswjs开放平台openapi接口封装
  */
 class OpenApi {
   /**
