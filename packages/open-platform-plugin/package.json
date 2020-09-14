@@ -11,14 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tswjs/open-platform-plugin.git"
+    "url": "git+https://github.com/tswjs/tsw-plugin.git",
+    "directory": "packages/open-platform-plugin"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "maplemiao <522856232@qq.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tswjs/open-platform-plugin/issues"
   },
   "homepage": "https://github.com/tswjs/open-platform-plugin#readme",
-  "description": "",
+  "description": "TSW 开放平台插件",
   "gitHead": "cb9a88877147883e4151c5ca5814e4b009436f54"
 }
