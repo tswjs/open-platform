@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tswjs/tsw-plugin.git",
+    "url": "git+https://github.com/tswjs/open-platform.git",
     "directory": "packages/open-platform-plugin"
   },
   "author": "maplemiao <522856232@qq.com>",

@@ -1,7 +1,7 @@
 {
-  "name": "tsw-plugin",
+  "name": "open-platform",
   "version": "1.0.0",
-  "description": "",
+  "description": "A lerna repo for TSW open platform.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tswjs/tsw-plugin.git"
+    "url": "git+https://github.com/tswjs/open-platform.git"
   },
   "author": "tsw-team",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tswjs/tsw-plugin/issues"
+    "url": "https://github.com/tswjs/open-platform/issues"
   },
-  "homepage": "https://github.com/tswjs/tsw-plugin#readme",
+  "homepage": "https://github.com/tswjs/open-platform#readme",
   "devDependencies": {
     "lerna": "^3.22.1"
   }
