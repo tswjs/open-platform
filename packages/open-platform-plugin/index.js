@@ -86,9 +86,15 @@ class OpenPlatformPlugin {
      */
     eventBus.on("REQUEST_START", (payload) => {
       const { req, context } = payload;
-    
-      context.uid = this.getUid(req);
-    
+      try{
+        context.uid = this.getUid(req);
+      } catch(e) {
+        context.uid = null;
+        this.log(`获取uid失败: ${e}`);
+      }
+      if(context.uid === null) {
+        return;
+      }
       // 1. 判断是否命中开放平台配置的代理名单
       for (const proxyIp of Object.keys(this.proxyInfo)) {
         if ((this.proxyInfo[proxyIp].remoteAlphaList && this.proxyInfo[proxyIp].remoteAlphaList.includes(context.uid))
