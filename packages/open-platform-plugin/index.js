@@ -86,6 +86,12 @@ class OpenPlatformPlugin {
      */
     eventBus.on("REQUEST_START", (payload) => {
       const { req, context } = payload;
+
+      this.log(`${req.method} ${req.url}`);
+      this.log(`server ip: ${this.intranetIp}, `
+        + `tcp: ${(req.socket.remoteAddress)}:${(req.socket.remotePort)} `
+        + `> ${(req.socket.localAddress)}:${(req.socket.localPort)}, client ip: ${this.getUserIp(req)}`);
+
       try{
         context.uid = this.getUid(req);
       } catch(e) {
@@ -111,11 +117,6 @@ class OpenPlatformPlugin {
         && this.proxyInfo[this.intranetIp].alphaList.includes(context.uid)) {
         context.proxyIp = "alpha"; // 不转发，但抓包
       }
-
-      this.log(`${req.method} ${req.url}`);
-      this.log(`server ip: ${this.intranetIp}, `
-        + `tcp: ${(req.socket.remoteAddress)}:${(req.socket.remotePort)} `
-        + `> ${(req.socket.localAddress)}:${(req.socket.localPort)}, client ip: ${this.getUserIp(req)}`);
     })
     
     /**
