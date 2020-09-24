@@ -2,6 +2,9 @@ const fetch = require("node-fetch");
 const URL = require("url");
 const { signature } = require("./sig");
 const { encode } = require("./encrypt");
+const getProxyForUrl = require('proxy-from-env').getProxyForUrl;
+const HttpsProxyAgent = require('https-proxy-agent');
+const HttpProxyAgent = require('http-proxy-agent');
 
 /**
  * tswjs开放平台openapi接口封装
@@ -25,30 +28,18 @@ class OpenApi {
     this.h5testListUrl = `${this.apiPrefix}/openapi/h5test/list`;
     this.h5testSetUrl = `${this.apiPrefix}/openapi/h5test/set`;
 
+    if (options.httpDomain) {
+      this.agent = new HttpProxyAgent(getProxyForUrl(this.apiPrefix));
+    } else {
+      this.agent = new HttpsProxyAgent(getProxyForUrl(this.apiPrefix));
+    }
+
     if (!this.appid) {
       throw new Error(`参数 appid 不能为空`);
     }
 
     if (!this.appkey) {
       throw new Error(`参数 appkey 不能为空`)
-    }
-    
-    this.handleProxy();
-  }
-
-  handleProxy() {
-    if ((process.env.no_proxy || "").includes(this.apiDomain)
-    || (process.env.NO_PROXY || "").includes(this.apiDomain)) {
-      return;
-    }
-  
-    if ((process.env.http_proxy || "").includes("127.0.0.1:12759")
-    || (process.env.HTTP_PROXY || "").includes("127.0.0.1:12759")
-    || (process.env.http_proxy || "").includes("127.0.0.1:12639")
-    || (process.env.HTTP_PROXY || "").includes("127.0.0.1:12639")) {
-      process.env.no_proxy = process.env.no_proxy 
-        ? `${process.env.no_proxy},${this.apiDomain}`
-        : this.apiDomain;
     }
   }
 
@@ -71,7 +62,8 @@ class OpenApi {
     const res = await fetch(this.h5testSyncUrl, {
       method: "post",
       body: JSON.stringify(data),
-      headers: {'Content-Type': 'application/json'}
+      headers: {'Content-Type': 'application/json'},
+      agent: this.agent,
     });
 
     const { code, msg, data: resData } = await res.json();
@@ -104,7 +96,8 @@ class OpenApi {
     const res = await fetch(this.h5testListUrl, {
       method: "post",
       body: JSON.stringify(data),
-      headers: {'Content-Type': 'application/json'}
+      headers: {'Content-Type': 'application/json'},
+      agent: this.agent,
     });
 
     const { code, msg, data: resData } = await res.json();
@@ -137,7 +130,8 @@ class OpenApi {
     const res = await fetch(this.h5testSetUrl, {
       method: "post",
       body: JSON.stringify(data),
-      headers: {'Content-Type': 'application/json'}
+      headers: {'Content-Type': 'application/json'},
+      agent: this.agent,
     });
 
     const { code, msg, data: resData } = await res.json();
@@ -169,7 +163,8 @@ class OpenApi {
     const res = await fetch(this.h5testSetUrl, {
       method: "post",
       body: JSON.stringify(data),
-      headers: {'Content-Type': 'application/json'}
+      headers: {'Content-Type': 'application/json'},
+      agent: this.agent,
     });
 
     const { code, msg, data: resData } = await res.json();
@@ -221,7 +216,8 @@ class OpenApi {
     const res = await fetch(this.logReportUrl, {
       method: "post",
       body: JSON.stringify(data),
-      headers: {'Content-Type': 'application/json'}
+      headers: {'Content-Type': 'application/json'},
+      agent: this.agent,
     });
 
     const { code, msg, data: resData } = await res.json();
@@ -267,7 +263,8 @@ class OpenApi {
     const res = await fetch(this.logReportUrl, {
       method: "post",
       body: JSON.stringify(data),
-      headers: {'Content-Type': 'application/json'}
+      headers: {'Content-Type': 'application/json'},
+      agent: this.agent,
     });
 
     const { code, msg, data: resData } = await res.json();

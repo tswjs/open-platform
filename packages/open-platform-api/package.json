@@ -11,7 +11,10 @@
   "author": "maplemiao <522856232@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "http-proxy-agent": "^4.0.1",
+    "https-proxy-agent": "^5.0.0",
+    "node-fetch": "^2.6.0",
+    "proxy-from-env": "^1.1.0"
   },
   "gitHead": "cb9a88877147883e4151c5ca5814e4b009436f54"
 }
