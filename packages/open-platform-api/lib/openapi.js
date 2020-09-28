@@ -28,10 +28,14 @@ class OpenApi {
     this.h5testListUrl = `${this.apiPrefix}/openapi/h5test/list`;
     this.h5testSetUrl = `${this.apiPrefix}/openapi/h5test/set`;
 
-    if (options.httpDomain) {
-      this.agent = new HttpProxyAgent(getProxyForUrl(this.apiPrefix));
-    } else {
-      this.agent = new HttpsProxyAgent(getProxyForUrl(this.apiPrefix));
+    const proxyUrl = getProxyForUrl(this.apiPrefix);
+
+    if (proxyUrl) {
+      if (options.httpDomain) {
+        this.agent = new HttpProxyAgent(proxyUrl);
+      } else {
+        this.agent = new HttpsProxyAgent(proxyUrl);
+      } 
     }
 
     if (!this.appid) {
