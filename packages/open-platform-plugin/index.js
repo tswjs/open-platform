@@ -55,7 +55,7 @@ class OpenPlatformPlugin {
       return userIp.substr(7);
     }
 
-    return userIp
+    return userIp;
   }
 
   /**
@@ -76,8 +76,8 @@ class OpenPlatformPlugin {
     this.log("上传 proxyInfo 中...");
     await this.reportProxyEnv();
     // 周期性上报代理环境
-    setInterval(()=>{
-      this.log("上传代理环境到开放平台（频率为 10min）...");
+    setInterval(() => {
+      this.log("上传代理环境到开放平台（间隔为 10min）...");
       this.reportProxyEnv();
     }, 600000);
 
@@ -103,8 +103,8 @@ class OpenPlatformPlugin {
       }
       // 1. 判断是否命中开放平台配置的代理名单
       for (const proxyIp of Object.keys(this.proxyInfo)) {
-        if ((this.proxyInfo[proxyIp].remoteAlphaList && this.proxyInfo[proxyIp].remoteAlphaList.includes(context.uid))
-            && proxyIp !== this.intranetIp) {
+        const remoteAlphaList = this.proxyInfo[proxyIp].remoteAlphaList || [];
+        if (remoteAlphaList.includes(context.uid) && proxyIp !== this.intranetIp) {
           context.proxyIp = proxyIp;
           context.proxyPort = this.proxyInfo[proxyIp].port || "80";
           break;
