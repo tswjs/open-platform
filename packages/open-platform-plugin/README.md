@@ -87,9 +87,7 @@ module.exports = {
 
 返回值如果为 `undefined`，表示这台机器不被允许通过代理到达。
 
-否则需要返回一个对象，认为这台机器会被注册到开放平台上，可以通过在开放平台上配置代理到达。  
-
-alphaList 表示本机希望抓包的用户列表。
+**如果返回一个对象，那么根据对象参数不同有几种情况：**
 
 ```json
 {
@@ -100,6 +98,19 @@ alphaList 表示本机希望抓包的用户列表。
   "desc": "2.0demo测试环境",
   "order": 30,
   "owner": "demoUser",
+  "alphaOnly": false,
   "alphaList": ["demoUser"]
 }
 ```
+
+#### `alphaOnly`
+
+- 默认为 `false`
+- 若值为 `false`，认为这台机器会被注册到开放平台上，可以通过在开放平台上配置代理到达。
+- 若值为 `true`，认为这台机器只是负责染色号码以记录日志。不可从开放平台配置代理。一般生产环境开启此参数。
+
+#### `alphaList`
+
+表示本机希望抓包的用户列表，值的比对对象是 `getUid` 方法返回值。
+
+即 `alphaList.includes(getUid())`。

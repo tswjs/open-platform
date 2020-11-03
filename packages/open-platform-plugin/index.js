@@ -175,6 +175,7 @@ class OpenPlatformPlugin {
     const proxyInfo = this.proxyInfo[this.intranetIp];
   
     if (!proxyInfo) return this.log(`不允许通过代理访问本机器，不上报开放平台`);
+    if (proxyInfo.alphaOnly) return this.log(`alphaOnly 参数为 true，不上报开放平台`);
   
     const logText = `${this.intranetIp}:${proxyInfo.port ? proxyInfo.port : '80'}`;
     let logJson = Object.assign({
