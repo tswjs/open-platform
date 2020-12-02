@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install_modules": "npx lerna bootstrap",
-    "publish": "npx lerna publish"
+    "install_modules": "lerna bootstrap",
+    "publish": "lerna publish"
   },
   "repository": {
     "type": "git",
