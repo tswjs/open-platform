@@ -237,6 +237,8 @@ class OpenApi {
   async reportLog(info) {
     const { logText, logJson, key, ua, userip, host, pathname, statusCode} = info;
 
+    if (!key) return;
+
     const data = {
       type: "alpha",
       appid: this.appid,
