@@ -77,9 +77,9 @@ class OpenPlatformPlugin {
     await this.reportProxyEnv();
     // 周期性上报代理环境
     setInterval(() => {
-      this.log("上传代理环境到开放平台（间隔为 10min）...");
+      this.log("上传代理环境到开放平台（间隔为 1min）...");
       this.reportProxyEnv();
-    }, 600000);
+    }, 60000);
 
     /**
      * 请求开始时，提取 uid
