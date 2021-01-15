@@ -89,7 +89,7 @@ class OpenPlatformPlugin {
      * 请求开始时，提取 uid
      */
     eventBus.on("REQUEST_START", (payload) => {
-      if (this.hooks.requestStart === 'function' && this.hooks.requestStart(payload) === false) {
+      if (typeof this.hooks.requestStart === 'function' && this.hooks.requestStart(payload) === false) {
         return
       }
       const { req, context } = payload;
@@ -130,7 +130,7 @@ class OpenPlatformPlugin {
      * 响应结束时，进行日志上报
      */
     eventBus.on("RESPONSE_FINISH", (payload) => {
-      if (this.hooks.responseFinish === 'function' && this.hooks.responseFinish(payload) === false) {
+      if (typeof this.hooks.responseFinish === 'function' && this.hooks.responseFinish(payload) === false) {
         return
       }
       const { req, res, context } = payload;
