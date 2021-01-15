@@ -42,12 +42,12 @@ module.exports = {
       // 请求回调函数
       hooks: {
         // 请求开始前回调，返回 false 则提前返回
-        beforeStart(payload) {
+        requestStart(payload) {
           const { req, context } = payload
           if (req.method === 'HEAD') return false
         },
         // 结束开始前回调，返回 false 则提前返回
-        beforeFinish(payload) {
+        responseFinish(payload) {
           const { req, context } = payload
           if (req.method === 'HEAD') return false
         },
@@ -100,14 +100,14 @@ module.exports = {
 
 返回值如果为 `undefined`，表示这台机器不被允许通过代理到达。
 
-### `hooks.beforeStart`
+### `hooks.requestStart`
 
 - `Function` 同步函数
 - 选填
 
 返回值如果为 `false`，则不做 uid 提取和匹配检查。
 
-### `hooks.beforeFinish`
+### `hooks.responseFinish`
 
 - `Function` 同步函数
 - 选填
