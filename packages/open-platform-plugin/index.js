@@ -10,8 +10,8 @@ class OpenPlatformPlugin {
    * @param {"never" | "always" | "proxied"} config.reportStrategy 上报策略
    * @param {Function} config.getUid 获取用户唯一标识
    * @param {Function} config.getProxyInfo 获取本机代理环境信息
-   * @param {Function} config.hooks.beforeStart 请求开始前回调，返回 false 则提前结束
-   * @param {Function} config.hooks.beforeFinish 结束开始前回调，返回 false 则提前结束
+   * @param {Function} config.hooks.beforeStart 请求开始前回调
+   * @param {Function} config.hooks.beforeFinish 结束开始前回调
    * @param {Boolean} httpDomain 是否使用 http 上报域名
    */
   constructor(config) {
