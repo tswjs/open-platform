@@ -293,7 +293,7 @@ class OpenPlatformPlugin {
   }
 
   log(string) {
-    console.debug(`[${this.name}]: ${string}`)
+    console.log(`[${this.name}]: ${string}`)
   }
 }
 
