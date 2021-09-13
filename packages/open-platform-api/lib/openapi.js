@@ -55,7 +55,7 @@ class OpenApi {
       }, timeout);
     });
 
-    const res = await Promise.race([timeoutPromise, fetch(url, payload)])
+    const res = await Promise.race([timeoutPromise, fetch(url, payload)]);
     if(res === -1) throw new Error(`fetch-timeout: ${url}`);
     clearTimeout(timer);
     return res;
