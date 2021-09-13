@@ -47,6 +47,20 @@ class OpenApi {
     }
   }
 
+  async fetchWithTimeout(url, payload = {}, timeout = 3000) {
+    let timer;
+    const timeoutPromise = new Promise((resolve) => {
+      timer = setTimeout(() => {
+        resolve(-1);
+      }, timeout);
+    });
+
+    const res = await Promise.race([timeoutPromise, fetch(url, payload)])
+    if(res === -1) throw new Error(`fetch-timeout: ${url}`);
+    clearTimeout(timer);
+    return res;
+  }
+
   /**
    * 从开放平台同步代理名单
    */
@@ -63,7 +77,7 @@ class OpenApi {
       appkey: this.appkey
     });
 
-    const res = await fetch(this.h5testSyncUrl, {
+    const res = await this.fetchWithTimeout(this.h5testSyncUrl, {
       method: "post",
       body: JSON.stringify(data),
       headers: {'Content-Type': 'application/json'},
@@ -97,7 +111,7 @@ class OpenApi {
       appkey: this.appkey
     });
 
-    const res = await fetch(this.h5testListUrl, {
+    const res = await this.fetchWithTimeout(this.h5testListUrl, {
       method: "post",
       body: JSON.stringify(data),
       headers: {'Content-Type': 'application/json'},
@@ -131,7 +145,7 @@ class OpenApi {
       appkey: this.appkey
     });
 
-    const res = await fetch(this.h5testSetUrl, {
+    const res = await this.fetchWithTimeout(this.h5testSetUrl, {
       method: "post",
       body: JSON.stringify(data),
       headers: {'Content-Type': 'application/json'},
@@ -164,7 +178,7 @@ class OpenApi {
       appkey: this.appkey
     });
 
-    const res = await fetch(this.h5testSetUrl, {
+    const res = await this.fetchWithTimeout(this.h5testSetUrl, {
       method: "post",
       body: JSON.stringify(data),
       headers: {'Content-Type': 'application/json'},
@@ -217,7 +231,7 @@ class OpenApi {
       appkey: this.appkey
     });
 
-    const res = await fetch(this.logReportUrl, {
+    const res = await this.fetchWithTimeout(this.logReportUrl, {
       method: "post",
       body: JSON.stringify(data),
       headers: {'Content-Type': 'application/json'},
@@ -266,7 +280,7 @@ class OpenApi {
       appkey: this.appkey
     });
 
-    const res = await fetch(this.logReportUrl, {
+    const res = await this.fetchWithTimeout(this.logReportUrl, {
       method: "post",
       body: JSON.stringify(data),
       headers: {'Content-Type': 'application/json'},
