@@ -13,14 +13,12 @@ class OpenApi {
   /**
    * 调用openapi依赖的参数
    * @param {*} options 参数对象
-   * @param {string} options.appid 应用 id
-   * @param {string} options.appkey 应用 key
    * @param {string} options.httpDomain 是否使用 http 上报域名
    */
   constructor(options = {}) {
     this.apiDomain = "openapi.tswjs.org";
-    this.appid = options.appid
-    this.appkey = options.appkey;
+    this.appid = process.env.APP_ID;
+    this.appkey = process.env.APP_KEY;
     this.apiPrefix = `${options.httpDomain ? "http" : "https"}://${this.apiDomain}`;
 
     this.logReportUrl = `${this.apiPrefix}/v1/log/report`;

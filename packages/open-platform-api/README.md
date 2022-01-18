@@ -11,8 +11,7 @@ Open api for https://tswjs.org
 const { OpenApi } = require("@tswjs/open-platform-api");
 
 const client = new OpenApi({
-  appid: "appid",
-  appkey: "appkey"
+  httpDomain: 'http',
 });
 
 /**

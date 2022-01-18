@@ -1,12 +1,14 @@
 const { OpenApi } = require('@tswjs/open-platform-api');
 const ip = require("ip");
 const net = require("net");
+const dotenv = require('dotenv');
+
+const DEFAULT_ENV_PATH = '.env';
 
 class OpenPlatformPlugin {
   /**
    * @param {Object} config 配置对象
-   * @param {String} config.appid 应用 id
-   * @param {String} config.appkey 应用 key
+   * @param {String} config.envPath 业务环境变量配置
    * @param {"never" | "always" | "proxied"} config.reportStrategy 上报策略
    * @param {Function} config.getUid 获取用户唯一标识
    * @param {Function} config.getProxyInfo 获取本机代理环境信息
@@ -21,11 +23,11 @@ class OpenPlatformPlugin {
     this.proxyInfo = {};
     this.intranetIp = ip.address();
 
+    this.initEnv(config.envPath);
+
     this.openApi = new OpenApi({
-      appid: config.appid,
-      appkey: config.appkey,
       httpDomain: config.httpDomain
-    })
+    });
 
     // 默认给一个返回 undefined 的同步函数
     this.getUid = config.getUid || (() => {});
@@ -33,6 +35,16 @@ class OpenPlatformPlugin {
     this.getProxyInfo = config.getProxyInfo || (() => {});
     // 回调函数
     this.hooks = config.hooks || {}
+  }
+
+  initEnv(configEnvPath) {
+    let envPath = DEFAULT_ENV_PATH;
+    if (configEnvPath) {
+      envPath = configEnvPath;
+    }
+    dotenv.config({
+      path: envPath,
+    });
   }
 
   /**
