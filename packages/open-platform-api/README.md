@@ -11,8 +11,7 @@ Open api for https://tswjs.org
 const { OpenApi } = require("@tswjs/open-platform-api");
 
 const client = new OpenApi({
-  appid: "appid",
-  appkey: "appkey"
+  httpDomain: 'http',
 });
 
 /**
@@ -54,4 +53,13 @@ client.removeTestUid(uinList).then(d => {
 }, e => {
   console.error(e);
 });
+```
+
+‼️ 重要
+
+2.0版本以后，不再允许将开放平台申请的 `appid` 和 `appkey` 通过参数的形式透传到插件中。业务可以选择用合适的方式将这两个参数挂载到环境变量当中，对应形式如下且环境变量的名称不可更改：
+
+```
+appid => process.env.APP_ID
+appkey =>  process.env.APP_KEY
 ```

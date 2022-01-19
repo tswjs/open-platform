@@ -14,8 +14,7 @@ const OpenPlatformPlugin = require("@tswjs/open-platform-plugin");
 module.exports = {
   plugins: [
     new OpenPlatformPlugin({
-      appid: "tsw1431",
-      appkey: "PwPaD4RRAsrSdRZjQSc3fbKM",
+      envPath: 'platform.env'
       reportStrategy: "always",
       // 只支持同步写法
       getUid: (request) => {
@@ -59,19 +58,26 @@ module.exports = {
 
 ## Config
 
-### `appid`
+### ‼️ 重要
 
+2.0版本以后，不再允许将开放平台申请的 `appid` 和 `appkey` 通过参数的形式透传到插件中。业务可以选择用合适的方式将这两个参数挂载到环境变量当中，对应形式如下且环境变量的名称不可更改：
+```
+appid => process.env.APP_ID
+appkey =>  process.env.APP_KEY
+```
+
+插件也支持传入环境变量(`*.env`)配置文件，在插件初始化阶段会将值挂载到环境变量上。
+
+### `envPath`
 - `String`
-- 必填
+- 非必填，本地绝对路径或相对路径（`process.cwd() + relativePath`）
+- 默认值: `.env`
 
-项目在 [TSW 开放平台](https://tswjs.org) 申请的应用 id。
-
-### `appkey`
-
-- `String`
-- 必填
-
-项目在 [TSW 开放平台](https://tswjs.org) 申请的应用 key。
+```js
+// platform.env
+APP_KEY=your_app_key
+APP_ID=your_app_id
+```
 
 ### `reportStrategy`
 
