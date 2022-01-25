@@ -1,6 +1,6 @@
 {
   "name": "@tswjs/open-platform-plugin",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "./index.js",
   "dependencies": {
     "@tswjs/open-platform-api": "^2.0.0",
@@ -16,7 +16,9 @@
     "directory": "packages/open-platform-plugin"
   },
   "author": "maplemiao <522856232@qq.com>",
-  "contributors": ["zackguo <gzl407473490@183.com>"],
+  "contributors": [
+    "zackguo <gzl407473490@183.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tswjs/open-platform-plugin/issues"
