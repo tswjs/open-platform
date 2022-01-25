@@ -16,6 +16,7 @@
     "directory": "packages/open-platform-plugin"
   },
   "author": "maplemiao <522856232@qq.com>",
+  "contributors": ["zackguo <gzl407473490@183.com>"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tswjs/open-platform-plugin/issues"
