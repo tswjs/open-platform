@@ -105,11 +105,19 @@ class OpenPlatformPlugin {
         return
       }
       const { req, context } = payload;
-
-      this.log(`${req.method} ${req.url}`);
+      const {
+        socket,
+        headers: {
+          host,
+        },
+        url,
+        method
+      } = req;
+      const serverPort = host === 'localhost' || net.isIP(host) ? `:${socket.address().port}` : '';
+      this.log(`${method} http://${host}${serverPort}${url}`);
       this.log(`server ip: ${this.intranetIp}, `
-        + `tcp: ${(req.socket.remoteAddress)}:${(req.socket.remotePort)} `
-        + `> ${(req.socket.localAddress)}:${(req.socket.localPort)}, client ip: ${this.getUserIp(req)}`);
+        + `tcp: ${(socket.remoteAddress)}:${(socket.remotePort)} `
+        + `> ${(socket.localAddress)}:${(socket.localPort)}, client ip: ${this.getUserIp(req)}`);
 
       try{
         context.uid = this.getUid(req);
@@ -270,10 +278,8 @@ class OpenPlatformPlugin {
       item.resultCode = item.statusCode;
       item.url = item.path;
     });
-  
     currentRequest.resultCode = currentRequest.statusCode;
     currentRequest.url = currentRequest.path;
-  
     const responseHeaders = (() => {
       const headers = {};
       res.getHeaderNames().forEach(name => {
@@ -281,7 +287,6 @@ class OpenPlatformPlugin {
       })
       return headers;
     })();
-  
     const logText = [].concat(context.log.arr)
       .concat(`\r\nresponse ${currentRequest.resultCode} ${
         JSON.stringify(responseHeaders, null, 4)
