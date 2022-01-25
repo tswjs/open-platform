@@ -9,6 +9,9 @@
     "directory": "packages/open-platform-api"
   },
   "author": "maplemiao <522856232@qq.com>",
+  "contributors": [
+    "zackguo <gzl407473490@183.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "http-proxy-agent": "^4.0.1",
