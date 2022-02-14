@@ -254,7 +254,6 @@ class OpenApi {
     const data = {
       type: "alpha",
       appid: this.appid,
-      appkey: this.appkey,
       now: Date.now(),
   
       logText: encode(this.appid, this.appkey, logText),
