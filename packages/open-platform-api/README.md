@@ -7,7 +7,7 @@ Open api for https://tswjs.org
 
 ## Usage
 
-```js
+```javascript
 const { OpenApi } = require("@tswjs/open-platform-api");
 
 const client = new OpenApi({
