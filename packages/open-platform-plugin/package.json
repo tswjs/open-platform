@@ -1,9 +1,9 @@
 {
   "name": "@tswjs/open-platform-plugin",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "main": "./index.js",
   "dependencies": {
-    "@tswjs/open-platform-api": "^2.0.4",
+    "@tswjs/open-platform-api": "^2.0.5",
     "dotenv": "^14.2.0",
     "ip": "^1.1.5"
   },
