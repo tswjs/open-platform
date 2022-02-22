@@ -10,9 +10,7 @@ Open api for https://tswjs.org
 ```js
 const { OpenApi } = require("@tswjs/open-platform-api");
 
-const client = new OpenApi({
-  httpDomain: 'http',
-});
+const client = new OpenApi();
 
 /**
  * 从开放平台同步代理名单

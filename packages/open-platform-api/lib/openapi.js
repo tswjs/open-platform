@@ -14,7 +14,7 @@ class OpenApi {
   /**
    * 调用openapi依赖的参数
    * @param {*} options 参数对象
-   * @param {string} options.httpDomain 是否使用 http 上报域名
+   * @param {string} options.httpDomain 是否使用 http 上报, 用于调试或者内部通道，正常都走https
    */
   constructor(options = {}) {
     this.apiDomain = "openapi.tswjs.org";
