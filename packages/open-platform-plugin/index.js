@@ -300,6 +300,8 @@ class OpenPlatformPlugin {
       },
       key: context.uid,
       ua: req.headers["user-agent"],
+      reqHeaders: req.headers,
+      resHeaders: responseHeaders,
       userip: context.clientIp,
       host: context.host,
       pathname: req.url,

@@ -1,3 +1,4 @@
+const path = require('path');
 const fetch = require("node-fetch");
 const URL = require("url");
 const { signature } = require("./sig");
@@ -243,13 +244,63 @@ class OpenApi {
     return resData;
   }
 
+  fingureGroup(reqHeaders, resHeaders, pathname = '') {
+    const contentType = resHeaders['content-type'] || '';
+    const ext = path.extname(pathname).toLowerCase();
+
+    if (!contentType) {
+      // 没声明算html
+      return 'html';
+    }
+    if (/^text\/html/.test(contentType)) {
+      return 'html';
+    }
+    if (contentType === 'websocket') {
+      return websocket;
+    }
+    if (reqHeaders['x-requested-with'] === 'XMLHttpRequest') {
+      return 'XHR';
+    }
+    if (/^text\/javascript/.test(contentType)) {
+      return 'js';
+    }
+    if (/^image\/.*/.test(contentType)) {
+      return 'image';
+    }
+    if (['.json', '.cgi', '.fcg', '.php'].includes(ext)) {
+      return 'XHR';
+    }
+    if (['.eot', '.svg', '.ttf', '.woff'].includes(ext)) {
+      return 'font';
+    }
+    // 其余的通过后缀区分吧
+    if (!ext) {
+      return '';
+    } else {
+      // 一些特殊后缀的映射
+      return {
+        gif: 'image',
+        xml: 'xml',
+        map: 'js',
+        // 有些js返回头不一样还是要根据后缀来
+        js: 'js'
+      }[ext] || '';
+    }
+  }
+
   /**
    * 上报日志
    */
   async reportLog(info) {
-    const { logText, logJson, key, ua, userip, host, pathname, statusCode} = info;
+    const {
+      logText, logJson, key, userip,
+      host, pathname, statusCode, ua,
+      reqHeaders = {}, resHeaders = {},
+    } = info;
 
     if (!key) return;
+
+    const group = this.fingureGroup(reqHeaders, resHeaders, pathname);
 
     const data = {
       type: "alpha",
@@ -267,7 +318,7 @@ class OpenApi {
       pathname,
       ext_info: '',
       statusCode,
-      group: ""
+      group,
     };
 
     data.sig = signature({
