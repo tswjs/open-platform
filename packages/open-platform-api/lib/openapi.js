@@ -22,7 +22,7 @@ class OpenApi {
     this.appkey = process.env.APP_KEY;
     this.apiPrefix = `${options.httpDomain ? "http" : "https"}://${this.apiDomain}`;
 
-    this.logReportUrl = `${this.apiPrefix}/v1/log/report`;
+    this.logReportUrl = `${this.apiPrefix}/v2/log/report`;
     this.h5testSyncUrl = `${this.apiPrefix}/v1/h5test/sync`;
     this.h5testListUrl = `${this.apiPrefix}/openapi/h5test/list`;
     this.h5testSetUrl = `${this.apiPrefix}/openapi/h5test/set`;
