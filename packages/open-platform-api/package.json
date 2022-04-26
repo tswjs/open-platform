@@ -1,6 +1,6 @@
 {
   "name": "@tswjs/open-platform-api",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Open api for https://tswjs.org",
   "main": "index.js",
   "repository": {
