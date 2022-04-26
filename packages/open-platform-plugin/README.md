@@ -147,3 +147,10 @@ APP_ID=your_app_id
 表示本机希望抓包的用户列表，值的比对对象是 `getUid` 方法返回值。
 
 即 `alphaList.includes(getUid())`。
+
+#### `fetchOpenPlatformTimeout`
+- `Number`
+- 选填
+- 默认值 `3000`
+
+请求开放平台的超时时间，单位为 ms。

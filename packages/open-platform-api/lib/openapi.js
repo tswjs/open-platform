@@ -14,13 +14,15 @@ class OpenApi {
   /**
    * 调用openapi依赖的参数
    * @param {*} options 参数对象
-   * @param {string} options.httpDomain 是否使用 http 上报, 用于调试或者内部通道，正常都走https
+   * @param {boolean} options.httpDomain 是否使用 http 上报, 用于调试或者内部通道，正常都走https
+   * @param {number} options.fetchOpenPlatformTimeout 请求开放平台的超时时间，默认为 3000 ms
    */
   constructor(options = {}) {
     this.apiDomain = "openapi.tswjs.org";
     this.appid = process.env.APP_ID;
     this.appkey = process.env.APP_KEY;
     this.apiPrefix = `${options.httpDomain ? "http" : "https"}://${this.apiDomain}`;
+    this.fetchOpenPlatformTimeout = options.fetchOpenPlatformTimeout || 3000;
 
     this.logReportUrl = `${this.apiPrefix}/v2/log/report`;
     this.h5testSyncUrl = `${this.apiPrefix}/v1/h5test/sync`;
@@ -46,7 +48,8 @@ class OpenApi {
     }
   }
 
-  async fetchWithTimeout(url, payload = {}, timeout = 3000) {
+  async fetchWithTimeout(url, payload = {}) {
+    const timeout = this.fetchOpenPlatformTimeout;
     let timer;
     const timeoutPromise = new Promise((resolve) => {
       timer = setTimeout(() => {

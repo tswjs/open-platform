@@ -14,10 +14,14 @@ class OpenPlatformPlugin {
    * @param {Function} config.getProxyInfo 获取本机代理环境信息
    * @param {Function} config.hooks.requestStart 请求开始前回调
    * @param {Function} config.hooks.responseFinish 结束开始前回调
-   * @param {Boolean} httpDomain 是否使用 http 上报域名
+   * @param {Boolean} config.httpDomain 是否使用 http 上报域名
+   * @param {number} config.fetchOpenPlatformTimeout fetch 开放平台超时时间，默认 3000 ms
    */
   constructor(config) {
     this.name = "OpenPlatformPlugin";
+
+    if(!config) throw `[${this.name}] please provide a config!`;
+
     this.reportStrategy = config.reportStrategy;
     this.reportStrategies = ["never", "always", "proxied"];
     this.proxyInfo = {};
@@ -26,7 +30,8 @@ class OpenPlatformPlugin {
     this.initEnv(config.envPath);
 
     this.openApi = new OpenApi({
-      httpDomain: config.httpDomain
+      httpDomain: config.httpDomain,
+      fetchOpenPlatformTimeout: config.fetchOpenPlatformTimeout,
     });
 
     // 默认给一个返回 undefined 的同步函数
@@ -128,9 +133,13 @@ class OpenPlatformPlugin {
       if(context.uid === null) {
         return;
       }
+
+      /* context.proxyIp: NOT_A_IP - 不转发，不抓包；alpha - 不转发，但抓包；ip - 转发且抓包 */
+
       // 1. 判断是否命中开放平台配置的代理名单
       for (const proxyIp of Object.keys(this.proxyInfo)) {
         const remoteAlphaList = this.proxyInfo[proxyIp].remoteAlphaList || [];
+        // 命中配置，且不能自己转发自己
         if (remoteAlphaList.includes(context.uid) && proxyIp !== this.intranetIp) {
           context.proxyIp = proxyIp;
           context.proxyPort = this.proxyInfo[proxyIp].port || "80";
