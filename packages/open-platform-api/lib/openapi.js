@@ -222,7 +222,6 @@ class OpenApi {
       pathname: '',
       statusCode: '',
       appid: this.appid,
-      appkey: this.appkey,
       now: Date.now(),
     };
 
