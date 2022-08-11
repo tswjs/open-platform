@@ -27,11 +27,15 @@ class OpenPlatformPlugin {
     this.proxyInfo = {};
     this.intranetIp = ip.address();
 
-    this.initEnv(config.envPath);
+    if (!config.appid || !config.appkey) {
+      this.initEnv(config.envPath);
+    }
 
     this.openApi = new OpenApi({
       httpDomain: config.httpDomain,
       fetchOpenPlatformTimeout: config.fetchOpenPlatformTimeout,
+      appid: config.appid,
+      appkey: config.appkey,
     });
 
     // 默认给一个返回 undefined 的同步函数
