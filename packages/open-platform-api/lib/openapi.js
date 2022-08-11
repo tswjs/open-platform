@@ -19,8 +19,8 @@ class OpenApi {
    */
   constructor(options = {}) {
     this.apiDomain = "openapi.tswjs.org";
-    this.appid = process.env.APP_ID;
-    this.appkey = process.env.APP_KEY;
+    this.appid = options.appid || process.env.APP_ID;
+    this.appkey = options.appkey || process.env.APP_KEY;
     this.apiPrefix = `${options.httpDomain ? "http" : "https"}://${this.apiDomain}`;
     this.fetchOpenPlatformTimeout = options.fetchOpenPlatformTimeout || 3000;
 
@@ -222,7 +222,6 @@ class OpenApi {
       pathname: '',
       statusCode: '',
       appid: this.appid,
-      appkey: this.appkey,
       now: Date.now(),
     };
 
