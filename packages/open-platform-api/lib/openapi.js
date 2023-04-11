@@ -14,11 +14,12 @@ class OpenApi {
   /**
    * 调用openapi依赖的参数
    * @param {*} options 参数对象
+   * @param {string} options.apiDomain 设置服务端域名, 用于调试或者内部通道，正常都走 openapi.tswjs.org
    * @param {boolean} options.httpDomain 是否使用 http 上报, 用于调试或者内部通道，正常都走https
    * @param {number} options.fetchOpenPlatformTimeout 请求开放平台的超时时间，默认为 3000 ms
    */
   constructor(options = {}) {
-    this.apiDomain = "openapi.tswjs.org";
+    this.apiDomain = options.apiDomain || "openapi.tswjs.org";
     this.appid = options.appid || process.env.APP_ID;
     this.appkey = options.appkey || process.env.APP_KEY;
     this.apiPrefix = `${options.httpDomain ? "http" : "https"}://${this.apiDomain}`;
