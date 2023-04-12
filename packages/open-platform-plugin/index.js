@@ -15,6 +15,7 @@ class OpenPlatformPlugin {
    * @param {Function} config.hooks.requestStart 请求开始前回调
    * @param {Function} config.hooks.responseFinish 结束开始前回调
    * @param {Boolean} config.httpDomain 是否使用 http 上报域名
+   * @param {string} config.apiDomain 自定义上报域名
    * @param {number} config.fetchOpenPlatformTimeout fetch 开放平台超时时间，默认 3000 ms
    */
   constructor(config) {
@@ -32,6 +33,7 @@ class OpenPlatformPlugin {
     }
 
     this.openApi = new OpenApi({
+      apiDomain: config.apiDomain,
       httpDomain: config.httpDomain,
       fetchOpenPlatformTimeout: config.fetchOpenPlatformTimeout,
       appid: config.appid,
